@@ -10,59 +10,65 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
+        <ui:composition template="../../templates/admin.xhtml">
+            <ui:param name="parametro" value="Provincias>>Listado"/>
+            <ui:define name="contenido">
+                <p:dataTable id="provincia" var="provincia" value="#{provinciaController.items}" rowKey="#{provincia.id}"
+                             selection="#{provinciaController.selected}" selectionMode="single"
+                             >
+                    <p:column headerText="Code">
+                        <h:outputText value="#{provincia.id}" />
+                    </p:column>
+                    <p:column headerText="Name">
+                        <h:outputText value="#{provincia.nombre}" />
+                    </p:column>
 
-        <p:dataTable id="provincia" var="provincia" value="#{provinciaController.items}" rowKey="#{provincia.id}"
-                     selection="#{provinciaController.selected}" selectionMode="single"
-                     >
+<p:column headerText="Activo">
+                <p:selectBooleanCheckbox  id="activo" value="#{provincia.activo}" itemLabel="Activo" disabled="true"/>  
 
-
-            <p:column headerText="Code">
-                <h:outputText value="#{provincia.id}" />
             </p:column>
-            <p:column headerText="Name">
-                <h:outputText value="#{provincia.nombre}" />
-            </p:column>
+                    <!--  <p:column headerText="Borrar" style="width:3rem;text-align: center">
+                          <p:commandButton  action="edit" value="Select"
+                                            icon="pi pi-search" title="View">
+                              <f:setPropertyActionListener value="#{provincia}"
+                                                           target="#{provinciaController.selected}"/>
+                          </p:commandButton>
+                      </p:column>-->
+
+                    <p:column headerText="Editar">
+
+                        <h:form>
 
 
-            <!--  <p:column headerText="Borrar" style="width:3rem;text-align: center">
-                  <p:commandButton  action="edit" value="Select"
-                                    icon="pi pi-search" title="View">
-                      <f:setPropertyActionListener value="#{provincia}"
-                                                   target="#{provinciaController.selected}"/>
-                  </p:commandButton>
-              </p:column>-->
 
-            <p:column headerText="Editar">
+
+                            <p:commandButton action = "#{provinciaController.preEdit}" value = "Editar" icon="pi pi-pencil" styleClass="ui-button-success"> <!--process="@this" >-->
+                                <f:setPropertyActionListener value="#{provincia}"
+                                                             target="#{provinciaController.selected}"/>
+                            </p:commandButton>
+                        </h:form>
+
+                    </p:column>
+                    <p:column headerText="Borrar">
+
+                        <h:form>
+
+                            <p:commandButton action = "#{provinciaController.remove}" value = "Borrar" icon="pi pi-trash" styleClass="ui-button-danger" >
+                                <f:setPropertyActionListener value="#{provincia}"
+                                                             target="#{provinciaController.selected}"/>
+                            </p:commandButton>
+
+                        </h:form>
+
+                    </p:column>
+                </p:dataTable>
 
                 <h:form>
-
-
-                    
-                    
-                    <h:commandButton action = "#{provinciaController.preEdit}" value = "Editar" > <!--process="@this" >-->
-                        <f:setPropertyActionListener value="#{provincia}"
-                                                     target="#{provinciaController.selected}"/>
-                    </h:commandButton>
+                    <p:commandButton action = "#{provinciaController.create}"   value = "Nuevo"  icon="pi pi-plus-circle"  />
                 </h:form>
 
-            </p:column>
-            <p:column headerText="Borrar">
-
-                <h:form>
-
-                    <h:commandButton action = "#{provinciaController.remove}" value = "Borrar" >
-                        <f:setPropertyActionListener value="#{provincia}"
-                                                     target="#{provinciaController.selected}"/>
-                    </h:commandButton>
-
-                </h:form>
-
-            </p:column>
-        </p:dataTable>
-
-        <h:form>
-            <h:commandButton action = "#{provinciaController.create}"   value = "Nuevo" />
-        </h:form>
+            </ui:define>
+        </ui:composition>
 
     </h:body>
 </html>

@@ -24,7 +24,27 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd">
 
-
+     <!--general-->
+    <navigation-rule>
+        <from-view-id>/admin/*</from-view-id>
+        <navigation-case>
+            <from-outcome>tipos</from-outcome>
+            <to-view-id>/admin/tipos/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>opciones</from-outcome>
+            <to-view-id>/admin/opciones/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>provincias</from-outcome>
+            <to-view-id>/admin/provincias/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>propiedades</from-outcome>
+            <to-view-id>/admin/propiedades/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <!--tipos -->
      <navigation-rule>
         <from-view-id>/admin/tipos/index.xhtml</from-view-id>
         <navigation-case>
@@ -113,8 +133,8 @@
         </navigation-case>
     </navigation-rule>
    
-     <!--provincias-->
-     <navigation-rule>
+    <!--provincias-->
+    <navigation-rule>
         <from-view-id>/admin/provincias/index.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>edit</from-outcome>
@@ -122,7 +142,7 @@
         </navigation-case>
         
          
-       <navigation-case>
+        <navigation-case>
             <from-outcome>remove</from-outcome>
             <to-view-id>/admin/provincias/index.xhtml</to-view-id>
         </navigation-case>
@@ -213,6 +233,71 @@
         <navigation-case>
             <from-outcome>failure</from-outcome>
             <to-view-id>/admin/localidades/edit.xhtml</to-view-id>
+        </navigation-case>
+       
+    </navigation-rule>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+       <!--propiedades-->
+    <navigation-rule>
+        <from-view-id>/admin/propiedades/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>edit</from-outcome>
+            <to-view-id>/admin/propiedades/edit.xhtml</to-view-id>
+        </navigation-case>
+        
+         
+        <navigation-case>
+            <from-outcome>remove</from-outcome>
+            <to-view-id>/admin/propiedades/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>create</from-outcome>
+            <to-view-id>/admin/propiedades/create.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/admin/propiedades/edit.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>sucess</from-outcome>
+            <to-view-id>/admin/propiedades/index.xhtml</to-view-id>
+        </navigation-case>
+          <navigation-case>
+            <from-outcome>remove</from-outcome>
+            <to-view-id>/admin/propiedades/edit.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>edit</from-outcome>
+            <to-view-id>/admin/localidades/edit.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>create</from-outcome>
+            <to-view-id>/admin/localidades/create.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>/admin/propiedades/edit.xhtml</to-view-id>
+        </navigation-case>
+       
+    </navigation-rule>
+    
+        <navigation-rule>
+        <from-view-id>/admin/propiedades/create.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>sucess</from-outcome>
+            <to-view-id>/admin/propiedades/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>/admin/propiedades/create.xhtml</to-view-id>
         </navigation-case>
        
     </navigation-rule>

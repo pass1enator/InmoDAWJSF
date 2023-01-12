@@ -10,8 +10,10 @@ package com.mycompany.inmodaw.model;
  */
 public class Imagen {
     private String path;
+    private int id;
+    private int posicion;
     public Imagen(){
-        
+        this.id=-1;
     }
 
     /**
@@ -26,5 +28,33 @@ public class Imagen {
      */
     public void setPath(String path) {
         this.path = path;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the posicion
+     */
+    public int getPosicion() {
+        return posicion;
+    }
+
+    /**
+     * @param posicion the posicion to set
+     */
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
     }
 }

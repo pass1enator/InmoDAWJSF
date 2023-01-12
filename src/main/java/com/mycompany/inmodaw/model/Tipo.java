@@ -16,6 +16,8 @@ public class Tipo  {
 
     public Tipo() {
         this.id = -1;
+        this.nombre="";
+        this.activo=true;
     }
 
     /**

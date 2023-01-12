@@ -10,7 +10,11 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
+ <ui:composition template="../../templates/admin.xhtml">
+            <ui:param name="parametro" value="Ejemplo de paso de parámetro"/>
+            <ui:define name="contenido">
 
+        
         <p:dataTable id="tipo" var="tipo" value="#{tipoController.items}" rowKey="#{tipo.id}"
                      selection="#{tipoController.selected}" selectionMode="single"
                      >
@@ -22,7 +26,10 @@
             <p:column headerText="Name">
                 <h:outputText value="#{tipo.nombre}" />
             </p:column>
+<p:column headerText="Activo">
+                <p:selectBooleanCheckbox  id="activo" value="#{tipo.activo}" itemLabel="Activo" disabled="true"/>  
 
+            </p:column>
 
             <!--  <p:column headerText="Borrar" style="width:3rem;text-align: center">
                   <p:commandButton  action="edit" value="Select"
@@ -39,10 +46,10 @@
 
                     
                     
-                    <h:commandButton action = "#{tipoController.preEdit}" value = "Editar" > <!--process="@this" >-->
+                    <p:commandButton action = "#{tipoController.preEdit}" value = "Editar" icon="pi pi-pencil" styleClass="ui-button-success" > <!--process="@this" >-->
                         <f:setPropertyActionListener value="#{tipo}"
                                                      target="#{tipoController.selected}"/>
-                    </h:commandButton>
+                    </p:commandButton>
                 </h:form>
 
             </p:column>
@@ -50,10 +57,10 @@
 
                 <h:form>
 
-                    <h:commandButton action = "#{tipoController.remove}" value = "Borrar" >
+                    <p:commandButton action = "#{tipoController.remove}" value = "Borrar"  icon="pi pi-trash" styleClass="ui-button-danger" >
                         <f:setPropertyActionListener value="#{tipo}"
                                                      target="#{tipoController.selected}"/>
-                    </h:commandButton>
+                    </p:commandButton>
 
                 </h:form>
 
@@ -61,8 +68,9 @@
         </p:dataTable>
 
         <h:form>
-            <h:commandButton action = "#{tipoController.create}"   value = "Nuevo" />
+            <p:commandButton action = "#{tipoController.create}"   value = "Nuevo"  icon="pi pi-plus-circle" />
         </h:form>
-
+         </ui:define>
+        </ui:composition>
     </h:body>
 </html>

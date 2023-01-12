@@ -8,7 +8,7 @@ package com.mycompany.inmodaw.model;
  *
  * @author Pedro
  */
-public class Localidad {
+public class Localidad implements Comparable<Localidad>, Cloneable {
      private String nombre;
     private boolean activo;
     private int id;
@@ -55,5 +55,25 @@ public class Localidad {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public int compareTo(Localidad o) {
+        if(o==null)
+            return -1;
+        else{
+            if(o.getId()==this.id)
+                return 0;
+            else
+                return 1;
+        }
+    }
+     @Override
+    protected Object clone(){
+        Localidad l= new Localidad();
+        l.activo=this.activo;
+        l.id=this.id;
+        l.nombre=this.nombre;
+        return l;
     }
 }

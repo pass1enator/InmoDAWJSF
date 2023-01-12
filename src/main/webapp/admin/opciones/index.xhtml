@@ -10,7 +10,10 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-
+ <ui:composition template="../../templates/admin.xhtml">
+            <ui:param name="parametro" value="Ejemplo de paso de parámetro"/>
+            <ui:define name="contenido">
+            
         <p:dataTable id="opcion" var="opcion" value="#{opcionController.items}" rowKey="#{opcion.id}"
                      selection="#{opcionController.selected}" selectionMode="single"
                      >
@@ -22,7 +25,10 @@
             <p:column headerText="Name">
                 <h:outputText value="#{opcion.nombre}" />
             </p:column>
+            <p:column headerText="Activo">
+                <p:selectBooleanCheckbox  id="activo" value="#{opcion.activo}" itemLabel="Activo" disabled="true"/>  
 
+            </p:column>
 
             <!--  <p:column headerText="Borrar" style="width:3rem;text-align: center">
                   <p:commandButton  action="edit" value="Select"
@@ -39,10 +45,10 @@
 
                     
                     
-                    <h:commandButton action = "#{opcionController.preEdit}" value = "Editar" > <!--process="@this" >-->
+                    <p:commandButton action = "#{opcionController.preEdit}" value = "Editar" icon="pi pi-pencil" styleClass="ui-button-success"> 
                         <f:setPropertyActionListener value="#{opcion}"
                                                      target="#{opcionController.selected}"/>
-                    </h:commandButton>
+                    </p:commandButton>
                 </h:form>
 
             </p:column>
@@ -50,10 +56,10 @@
 
                 <h:form>
 
-                    <h:commandButton action = "#{opcionController.remove}" value = "Borrar" >
+                    <p:commandButton action = "#{opcionController.remove}" value = "Borrar" icon="pi pi-trash" styleClass="ui-button-danger" >
                         <f:setPropertyActionListener value="#{opcion}"
                                                      target="#{opcionController.selected}"/>
-                    </h:commandButton>
+                    </p:commandButton>
 
                 </h:form>
 
@@ -61,8 +67,11 @@
         </p:dataTable>
 
         <h:form>
-            <h:commandButton action = "#{opcionController.create}"   value = "Nuevo" />
+            <p:commandButton action = "#{opcionController.create}"   value = "Nuevo"  icon="pi pi-plus-circle"  />
         </h:form>
+
+            </ui:define>
+        </ui:composition>
 
     </h:body>
 </html>

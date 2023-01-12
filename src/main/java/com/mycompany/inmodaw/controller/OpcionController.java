@@ -58,6 +58,7 @@ public class OpcionController extends AbstractController<Opcion> {
         t.setActivo(this.getSelected().isActivo());
         t.setId(this.getSelected().getId());
         t.setNombre(this.getSelected().getNombre());
+        this.setSelected(t);
         return "edit";
     }
 

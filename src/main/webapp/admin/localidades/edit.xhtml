@@ -17,7 +17,9 @@
                     <p:inputText id="id" disabled="true" value="#{localidadController.selected.id}"/>
                     <h:outputLabel value="Nombre" for="name" />
                     <p:inputText id="name" value="#{localidadController.selected.nombre}" title="name" required="true" requiredMessage="requerido"/>
-                 <p:selectBooleanCheckbox  id="activo" value="#{localidadController.selected.activo}" itemLabel="Activo"/>  
+                  <h:outputLabel value="Activo" for="activo" />
+                   
+                    <p:selectBooleanCheckbox  id="activo" value="#{localidadController.selected.activo}" itemLabel="Activo"/>  
                     
                     <h:commandButton action="#{localidadController.add}" value="Actualizar"/>
                <h:commandButton action="#{localidadController.cancel}" value="Cancelar"/>

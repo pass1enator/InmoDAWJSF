@@ -5,12 +5,13 @@
 package com.mycompany.inmodaw.model;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  *
  * @author Pedro
  */
-public class Provincia {
+public class Provincia implements Cloneable{
     private String nombre;
     private boolean activo;
     private int id;
@@ -67,11 +68,22 @@ public class Provincia {
     public ArrayList<Localidad> getLocalidades() {
         return localidades;
     }
-
+    public void addLocalidad(Localidad l){
+        this.localidades.add(l);
+    }
     /**
      * @param localidades the localidades to set
      */
     public void setLocalidades(ArrayList<Localidad> localidades) {
         this.localidades = localidades;
+    }
+   @Override
+    protected Object clone(){
+        Provincia item= new Provincia();
+        item.activo=this.activo;
+        item.id=this.id;
+        item.nombre=this.nombre;
+        item.setLocalidades((ArrayList<Localidad>) this.localidades.stream().collect(Collectors.toList()));
+        return item;
     }
 }

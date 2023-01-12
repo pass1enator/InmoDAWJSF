@@ -4,8 +4,8 @@
  */
 package com.mycompany.inmodaw.controller;
 
-import com.mycompany.inmodaw.controller.reposotory.IRepository;
-import com.mycompany.inmodaw.controller.reposotory.MemoryRepository;
+import com.mycompany.inmodaw.controller.repository.IRepository;
+import com.mycompany.inmodaw.controller.repository.MemoryRepository;
 import com.mycompany.inmodaw.model.ICopyable;
 
 import com.mycompany.inmodaw.model.Tipo;

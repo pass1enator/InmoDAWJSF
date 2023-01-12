@@ -10,7 +10,8 @@ import java.util.ArrayList;
  *
  * @author Pedro
  */
-public class Propiedad {
+public class Propiedad implements Cloneable {
+
     private String direccion;
     private int precio;
     private Tipo tipo;
@@ -18,8 +19,15 @@ public class Propiedad {
     private Localidad localidad;
     private ArrayList<Imagen> imagenes;
     private Imagen principal;
-    public Propiedad(){
-        this.imagenes= new ArrayList<>();
+    private boolean activo;
+    private int id;
+
+    public Propiedad() {
+        this.imagenes = new ArrayList<>();
+        this.id = -1;
+        this.direccion = "hla";
+        this.activo = true;
+        this.tipo = new Tipo();
     }
 
     /**
@@ -104,5 +112,48 @@ public class Propiedad {
      */
     public void setImagenes(ArrayList<Imagen> imagenes) {
         this.imagenes = imagenes;
+    }
+
+    /**
+     * @return the activo
+     */
+    public boolean isActivo() {
+        return activo;
+    }
+
+    /**
+     * @param activo the activo to set
+     */
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public Object clone() {
+        Propiedad p = new Propiedad();
+        p.setId(id);
+        p.setDireccion(direccion);
+        p.setActivo(activo);
+        p.setPrecio(precio);
+        //copia superficial
+        p.setLocalidad(localidad);
+        p.setOpcion(opcion);
+        p.setTipo(tipo);
+        //faltan las imagenes
+        return p;
     }
 }

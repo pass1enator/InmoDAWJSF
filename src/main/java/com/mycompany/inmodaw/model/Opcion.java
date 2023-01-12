@@ -13,7 +13,9 @@ public class Opcion {
     private boolean activo;
     private int id;
     public Opcion(){
-        this.id=-1;
+       this.id = -1;
+        this.nombre="";
+        this.activo=true;
     }
      /**
      * @return the nombre

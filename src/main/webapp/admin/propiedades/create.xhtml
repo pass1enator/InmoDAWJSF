@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <title>Editar</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../../templates/admin.xhtml">
+            <ui:param name="parametro" value="Propiedades>>Alta"/>
+            <ui:define name="contenido">
+
+
+                <p:outputPanel id="manage-product-content" class="ui-fluid">
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Id" for="id" />
+                            <p:inputText id="id" disabled="true" value="#{propiedadEditView.propiedad.id}"/>
+                            <h:outputLabel value="Dirección" for="direccion" />
+                            <p:inputText id="direccion" value="#{propiedadEditView.propiedad.direccion}" title="direccion" required="true" requiredMessage="requerido"/>
+                            <h:outputLabel value="Activo" for="activo" />
+                            <p:selectBooleanCheckbox  id="activo" value="#{propiedadEditView.propiedad.activo}"/>   
+                            <p:outputLabel for="tipo" value="Tipo"/>
+                            <p:selectOneMenu id="tipo" value="#{propiedadEditView.tipo}" >
+                                <f:selectItem itemLabel="Select One" itemValue=""/>
+                                <f:selectItems value="#{propiedadEditView.tipos}" var="tipo"
+                                               itemValue="#{tipo.nombre}"
+                                               itemLabel="#{tipo.nombre}"
+                                               itemDisabled="#{!tipo.activo}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel for="opcion" value="Opcion"/>
+                            <p:selectOneMenu id="opcion"   value="#{propiedadEditView.opcion}">
+                                <f:selectItem itemLabel="Select One" itemValue=""/>
+                                <f:selectItems value="#{propiedadEditView.opciones}" var="opcion"
+                                               itemValue="#{opcion.nombre}"
+                                               itemLabel="#{opcion.nombre}"
+                                               itemDisabled="#{!opcion.activo}"
+                                               />
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="provincia" value="Provincia"/>
+
+                            <p:selectOneMenu id="provincia"   value="#{propiedadEditView.provincia}" >
+                                <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true"/>
+                                <f:selectItems value="#{propiedadEditView.provincias}" var="provincia"
+
+                                               itemValue="#{provincia.nombre}"
+                                               itemLabel="#{provincia.nombre}"
+                                               />
+     <p:ajax listener="#{propiedadEditView.onProvinciaChange}" update="loc"/>
+                            
+                            </p:selectOneMenu>
+                            <p:outputLabel for="loc" value="Localidad"/>
+                            <p:selectOneMenu id="loc" value="#{propiedadEditView.localidad}">
+                                <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true"/>
+                                <f:selectItems value="#{propiedadEditView.localidades}" var="localidad"
+                                               itemValue="#{localidad.nombre}"
+                                               itemLabel="#{localidad.nombre}"
+                                               />
+                            </p:selectOneMenu>
+                            <p:commandButton action="#{propiedadEditView.cancel}" value="Cancelar" icon="pi pi-times"  styleClass="ui-button-warning"/>
+
+                            <p:commandButton action="#{propiedadEditView.add}" value="Alta"/>
+                        </h:panelGrid>
+                    </h:form>
+                </p:outputPanel> 
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>
