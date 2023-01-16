@@ -25,7 +25,7 @@ public class Propiedad implements Cloneable {
     public Propiedad() {
         this.imagenes = new ArrayList<>();
         this.id = -1;
-        this.direccion = "hla";
+        this.direccion = "";
         this.activo = true;
         this.tipo = new Tipo();
     }
@@ -36,7 +36,9 @@ public class Propiedad implements Cloneable {
     public String getDireccion() {
         return direccion;
     }
-
+    public Localidad getLocalidad(){
+        return this.localidad;
+    }
     /**
      * @param direccion the direccion to set
      */
@@ -86,12 +88,7 @@ public class Propiedad implements Cloneable {
         this.opcion = opcion;
     }
 
-    /**
-     * @return the localidad
-     */
-    public Localidad getLocalidad() {
-        return localidad;
-    }
+  
 
     /**
      * @param localidad the localidad to set
@@ -142,6 +139,12 @@ public class Propiedad implements Cloneable {
         this.id = id;
     }
 
+    public void removeImagen(Imagen img) {
+            this.imagenes.removeIf(
+                    item->{ return item.getId()==img.getId();}
+            );
+    }
+
     @Override
     public Object clone() {
         Propiedad p = new Propiedad();
@@ -153,6 +156,7 @@ public class Propiedad implements Cloneable {
         p.setLocalidad(localidad);
         p.setOpcion(opcion);
         p.setTipo(tipo);
+        p.setImagenes(this.imagenes);
         //faltan las imagenes
         return p;
     }

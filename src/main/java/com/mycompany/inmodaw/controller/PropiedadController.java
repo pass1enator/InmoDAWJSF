@@ -4,6 +4,7 @@
  */
 package com.mycompany.inmodaw.controller;
 
+import com.mycompany.inmodaw.model.Imagen;
 import com.mycompany.inmodaw.model.Localidad;
 import com.mycompany.inmodaw.model.Opcion;
 import com.mycompany.inmodaw.model.Propiedad;
@@ -11,9 +12,11 @@ import com.mycompany.inmodaw.model.Provincia;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.ValueChangeEvent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 /**
@@ -32,7 +35,7 @@ public class PropiedadController extends AbstractController<Propiedad> {
     private TipoController tipocontroller;
     @Inject
     private OpcionController opcionController;
-
+   // private String image_path;
     public PropiedadController() {
         super(Propiedad::new);
         //this.load();
@@ -46,7 +49,7 @@ public class PropiedadController extends AbstractController<Propiedad> {
     @Override
     @PostConstruct
     public void load() {
-        
+     // this.image_path=origRequest.getRequestURI();
         this.create();
         this.getSelected().setDireccion("ejemplo1");
         this.getSelected().setOpcion(this.opcionController.getItems().get(0));
@@ -68,12 +71,6 @@ public class PropiedadController extends AbstractController<Propiedad> {
 
     @Override
     public String preEdit() {
-        /*Provincia t = new Provincia();
-        t.setActivo(this.getSelected().isActivo());
-        t.setId(this.getSelected().getId());
-        t.setNombre(this.getSelected().getNombre());
-        t.setLocalidades(this.getSelected().getLocalidades());
-        this.setSelected(t);*/
         return "edit";
     }
 
@@ -83,8 +80,6 @@ public class PropiedadController extends AbstractController<Propiedad> {
 
     public String precreateLocalidad() {
         this.localidadontroller.create();
-        // l.setId(this.getSelected().getLocalidades().size());
-        // this.getSelected().getLocalidades().add(l);
         return "create";
     }
 
@@ -106,6 +101,9 @@ public class PropiedadController extends AbstractController<Propiedad> {
             p=element.get();
         return p;
     }
+    public void removeImage(Imagen img){
+       this.getSelected().removeImagen(img);
+    }
     /*public String removeLocalidad() {
         Localidad l = this.localidadontroller.getSelected();
         this.getSelected().getLocalidades().remove(l);
@@ -117,15 +115,16 @@ public class PropiedadController extends AbstractController<Propiedad> {
         if (this.getSelected() != null) {
             if (this.getSelected().getId() == -1) {
                 this.getSelected().setId(this.repositorio.getAll().size() + 1);
-                this.repositorio.add(this.getSelected());
+                this.repositorio.create(this.getSelected());
             } else {
                 //si ya existe
-                Propiedad t = this.repositorio.getAll().stream().filter(item -> {
+                /*Propiedad t = this.repositorio.getAll().stream().filter(item -> {
                     return item.getId() == this.getSelected().getId();
-                }).findFirst().get();
-                /* t.setNombre(this.getSelected().getNombre());
-            t.setActivo(this.getSelected().isActivo());*/
-                this.setSelected(null);
+                }).findFirst().get();*/
+                this.repositorio.update(this.getSelected());
+                /* t.setNombre(this.getSelected().getNombre());*/
+          
+            
             }
         }
         return "sucess";

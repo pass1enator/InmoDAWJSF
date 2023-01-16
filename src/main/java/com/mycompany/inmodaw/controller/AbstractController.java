@@ -40,7 +40,7 @@ public abstract class AbstractController<T> implements IController<T>{
     }
     @Override
     public String cancel(){
-        this.current=null;
+        //this.current=null;
         return "sucess";
     }
     @Override

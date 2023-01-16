@@ -11,7 +11,8 @@ import java.util.ArrayList;
  * @author Pedro
  */
 public interface IRepository<T> {
-    public void add(T item);
+    public void create(T item);
+    public void update(T item);
     public void remove(int id);
     public void remove (T item);
     public ArrayList<T> getAll();

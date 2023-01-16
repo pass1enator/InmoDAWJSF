@@ -8,6 +8,7 @@ import com.mycompany.inmodaw.model.Opcion;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 /**
@@ -18,9 +19,12 @@ import jakarta.inject.Named;
 @ApplicationScoped
 public class OpcionController extends AbstractController<Opcion> {
 
+    @Inject
+    PropiedadController propiedadcontroller;
+
     public OpcionController() {
         super(Opcion::new);
-        //this.load();
+
     }
 
     @Override
@@ -28,37 +32,42 @@ public class OpcionController extends AbstractController<Opcion> {
     public void load() {
         this.create();
         this.getSelected().setActivo(true);
-        //this.getSelected().setId(-1);
+
         this.getSelected().setNombre("Alquiler");
         this.add();
 
         this.create();
         this.getSelected().setActivo(true);
-        //this.getSelected().setId(-2);
+
         this.getSelected().setNombre("Venta");
         this.add();
 
         this.create();
         this.getSelected().setActivo(true);
-        //this.getSelected().setId(3);
+
         this.getSelected().setNombre("Compartir");
         this.add();
     }
 
     public String remove() {
         if (this.getSelected() != null) {
-            this.repositorio.remove(this.getSelected());
+            if (this.propiedadcontroller.getItems().stream().filter(item -> {
+                return item.getOpcion() == this.getSelected();
+            }).count() == 0) {
+                this.repositorio.remove(this.getSelected());
+                return "remove";
+            } else {
+                return "";
+            }
+
         }
-        return "remove";
+        //se tiene que poner el error
+        return "";
     }
 
     @Override
     public String preEdit() {
-        Opcion t= new Opcion();
-        t.setActivo(this.getSelected().isActivo());
-        t.setId(this.getSelected().getId());
-        t.setNombre(this.getSelected().getNombre());
-        this.setSelected(t);
+
         return "edit";
     }
 
@@ -67,15 +76,10 @@ public class OpcionController extends AbstractController<Opcion> {
         //si es nuevo
         if (this.getSelected().getId() == -1) {
             this.getSelected().setId(this.repositorio.getAll().size() + 1);
-            this.repositorio.add(this.getSelected());
+            this.repositorio.create(this.getSelected());
         } else {
-            //si ya existe
-            Opcion t = this.repositorio.getAll().stream().filter(item -> {
-                return item.getId() == this.getSelected().getId();
-            }).findFirst().get();
-            t.setNombre(this.getSelected().getNombre());
-            t.setActivo(this.getSelected().isActivo());
-            this.setSelected(null);
+            this.repositorio.update(this.getSelected());
+
         }
         return "sucess";
     }

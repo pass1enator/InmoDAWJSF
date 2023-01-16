@@ -21,7 +21,10 @@ import jakarta.inject.Named;
 @ApplicationScoped
 public class LocalidadController extends AbstractController<Localidad> {
 
-    
+    @Inject
+    ProvinciaController provinciaController;
+    @Inject
+    PropiedadController propiedadController;
 
     public LocalidadController() {
         super(Localidad::new);
@@ -31,20 +34,25 @@ public class LocalidadController extends AbstractController<Localidad> {
     @Override
     @PostConstruct
     public void load() {
-        
-     
+
     }
 
     public String remove() {
         if (this.getSelected() != null) {
-            this.repositorio.remove(this.getSelected());
+            if (this.propiedadController.getItems().stream().filter(item -> {
+                return this.getSelected() == item.getLocalidad();
+            }).count() == 0) {
+                this.provinciaController.getSelected().getLocalidades().remove(this.getSelected());
+
+            }
+            //this.repositorio.remove(this.getSelected());
         }
         return "remove";
     }
 
     @Override
     public String preEdit() {
-      /*  Localidad t = new Localidad();
+        /*  Localidad t = new Localidad();
         t.setActivo(this.getSelected().isActivo());
         t.setId(this.getSelected().getId());
         t.setNombre(this.getSelected().getNombre());*/
@@ -55,18 +63,15 @@ public class LocalidadController extends AbstractController<Localidad> {
     @Override
     public String add() {
         //si es nuevo
-       /* if (this.getSelected().getId() == -1) {
-            this.getSelected().setId(this.repositorio.getAll().size() + 1);
-            this.repositorio.add(this.getSelected());
-        } else {*/
+        if (this.getSelected().getId() == -1) {
+            this.getSelected().setId(this.provinciaController.getSelected().getLocalidades().size() + 1);
+
+            this.provinciaController.getSelected().addLocalidad(this.getSelected());//.repositorio.add(this.getSelected());
+        } else {
             //si ya existe
-          /*  Localidad t = this.getSelected().repositorio.getAll().stream().filter(item -> {
-                return item.getId() == this.getSelected().getId();
-            }).findFirst().get();
-            t.setNombre(this.getSelected().getNombre());
-            t.setActivo(this.getSelected().isActivo());
-            this.setSelected(null);*/
-      //  }
+            //en este caso no se hace nada
+            //this.setSelected(null);
+        }
         return "sucess";
     }
 }

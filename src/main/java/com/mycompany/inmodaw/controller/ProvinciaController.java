@@ -14,6 +14,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.faces.event.ValueChangeEvent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import java.util.List;
 
 /**
  *
@@ -25,6 +26,8 @@ public class ProvinciaController extends AbstractController<Provincia> {
 
     @Inject
     LocalidadController localidadontroller;
+    @Inject
+    PropiedadController propiedadcontroller;
 
     public ProvinciaController() {
         super(Provincia::new);
@@ -75,20 +78,36 @@ public class ProvinciaController extends AbstractController<Provincia> {
     }
 
     public String remove() {
+        List<Localidad> localidades;
+
         if (this.getSelected() != null) {
-            this.repositorio.remove(this.getSelected());
+            localidades = this.getSelected().getLocalidades();
+            //se mira si existe alguna propiedad con alguna localidad de la provincia
+            if (this.propiedadcontroller.getItems().stream().filter(
+                    item -> localidades.stream().anyMatch(
+                            localidad -> item.getLocalidad().getId() == localidad.getId()
+                    )
+            ).count() == 0) {
+
+                this.repositorio.remove(this.getSelected());
+                return "remove";
+            } else {
+                return "";
+            }
+            // this.repositorio.remove(this.getSelected());
         }
+
         return "remove";
     }
 
     @Override
     public String preEdit() {
-        Provincia t = new Provincia();
+        /*Provincia t = new Provincia();
         t.setActivo(this.getSelected().isActivo());
         t.setId(this.getSelected().getId());
         t.setNombre(this.getSelected().getNombre());
         t.setLocalidades(this.getSelected().getLocalidades());
-        this.setSelected(t);
+        this.setSelected(t);*/
         return "edit";
     }
 
@@ -98,8 +117,6 @@ public class ProvinciaController extends AbstractController<Provincia> {
 
     public String precreateLocalidad() {
         this.localidadontroller.create();
-        // l.setId(this.getSelected().getLocalidades().size());
-        // this.getSelected().getLocalidades().add(l);
         return "create";
     }
 
@@ -109,19 +126,16 @@ public class ProvinciaController extends AbstractController<Provincia> {
         this.getSelected().getLocalidades().add(l);
         return "sucess";
     }
-    /**
-     * obtener dada una localidad la provincia a la que pertenece
-     * @param l
-     * @return 
-     */
+
+  
     public Provincia getProvinciaByLocalidad(Localidad l) {
         Provincia p = null;
-       
+
         for (int i = 0; i < this.getItems().size() && p == null; i++) {
             if (this.getItems().get(i).getLocalidades().stream().anyMatch(item -> {
                 return item == l;
             })) {
-                p=this.getItems().get(i);
+                p = this.getItems().get(i);
             }
         }
         return p;
@@ -147,15 +161,9 @@ public class ProvinciaController extends AbstractController<Provincia> {
         //si es nuevo
         if (this.getSelected().getId() == -1) {
             this.getSelected().setId(this.repositorio.getAll().size() + 1);
-            this.repositorio.add(this.getSelected());
+            this.repositorio.create(this.getSelected());
         } else {
-            //si ya existe
-            Provincia t = this.repositorio.getAll().stream().filter(item -> {
-                return item.getId() == this.getSelected().getId();
-            }).findFirst().get();
-            t.setNombre(this.getSelected().getNombre());
-            t.setActivo(this.getSelected().isActivo());
-            this.setSelected(null);
+            this.repositorio.update(this.getSelected());
         }
         return "sucess";
     }

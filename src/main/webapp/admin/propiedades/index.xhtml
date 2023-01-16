@@ -23,25 +23,12 @@
                         <h:outputText value="#{propiedad.direccion}" />
                     </p:column>
 
-<p:column headerText="Activo">
-                <p:selectBooleanCheckbox  id="activo" value="#{propiedad.activo}" itemLabel="Activo" disabled="true"/>  
-
-            </p:column>
-                      <p:column headerText="Borrar" style="width:3rem;text-align: center">
-                          <p:commandButton  action="edit" value="Select"
-                                            icon="pi pi-search" title="View">
-                              <f:setPropertyActionListener value="#{propiedad}"
-                                                           target="#{propiedad.propiedad}"/>
-                          </p:commandButton>
-                      </p:column>
-
+                    <p:column headerText="Activo">
+                        <p:selectBooleanCheckbox  id="activo" value="#{propiedad.activo}" itemLabel="Activo" disabled="true"/>  
+                    </p:column>
                     <p:column headerText="Editar">
 
                         <h:form>
-
-
-
-
                             <p:commandButton action = "#{propiedadController.preEdit}" value = "Editar" icon="pi pi-pencil" styleClass="ui-button-success"> <!--process="@this" >-->
                                 <f:setPropertyActionListener value="#{propiedad}"
                                                              target="#{propiedadController.selected}"/>
@@ -53,9 +40,9 @@
 
                         <h:form>
 
-                            <p:commandButton action = "#{propiedadEditView.preEdit}" value = "Borrar" icon="pi pi-trash" styleClass="ui-button-danger" >
+                            <p:commandButton action = "#{propiedadController.remove}" value = "Borrar" icon="pi pi-trash" styleClass="ui-button-danger" >
                                 <f:setPropertyActionListener value="#{propiedad}"
-                                                             target="#{propiedadEditView.propiedad}"/>
+                                                             target="#{propiedadController.propiedad}"/>
                             </p:commandButton>
 
                         </h:form>

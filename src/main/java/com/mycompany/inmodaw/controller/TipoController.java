@@ -7,6 +7,9 @@ package com.mycompany.inmodaw.controller;
 import com.mycompany.inmodaw.model.Tipo;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 /**
@@ -16,6 +19,9 @@ import jakarta.inject.Named;
 @Named
 @ApplicationScoped
 public class TipoController extends AbstractController<Tipo> {
+
+    @Inject
+    PropiedadController propiedadcontroller;
 
     public TipoController() {
         super(Tipo::new);
@@ -46,18 +52,24 @@ public class TipoController extends AbstractController<Tipo> {
 
     public String remove() {
         if (this.getSelected() != null) {
-            this.repositorio.remove(this.getSelected());
+            if (this.propiedadcontroller.getItems().stream().filter(item -> {
+                return item.getTipo() == this.getSelected();
+            }).count() == 0) {
+                this.repositorio.remove(this.getSelected());
+                return "remove";
+            } else {
+                return "";
+            }
+
         }
-        return "remove";
+        //se tiene que poner el error
+        return "";
+
     }
 
     @Override
     public String preEdit() {
-        Tipo t= new Tipo();
-        t.setActivo(this.getSelected().isActivo());
-        t.setId(this.getSelected().getId());
-        t.setNombre(this.getSelected().getNombre());
-         this.setSelected(t);
+
         return "edit";
     }
 
@@ -66,15 +78,11 @@ public class TipoController extends AbstractController<Tipo> {
         //si es nuevo
         if (this.getSelected().getId() == -1) {
             this.getSelected().setId(this.repositorio.getAll().size() + 1);
-            this.repositorio.add(this.getSelected());
+            this.repositorio.create(this.getSelected());
         } else {
+            this.repositorio.update(this.getSelected());
             //si ya existe
-            Tipo t = this.repositorio.getAll().stream().filter(item -> {
-                return item.getId() == this.getSelected().getId();
-            }).findFirst().get();
-            t.setNombre(this.getSelected().getNombre());
-            t.setActivo(this.getSelected().isActivo());
-            this.setSelected(null);
+    
         }
         return "sucess";
     }

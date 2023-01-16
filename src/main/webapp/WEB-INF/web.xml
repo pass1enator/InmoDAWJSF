@@ -18,6 +18,16 @@
             30
         </session-timeout>
     </session-config>
+    <context-param>
+        <param-name>ruta_imagenes</param-name>
+        <param-value>C:\Users\Pedro\Desktop\payara6\glassfish\domains\domain1\docroot\img</param-value>
+    </context-param>
+    
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Production</param-value>
+    </context-param>
+
     <welcome-file-list>
         <welcome-file>admin/propiedades/index.xhtml</welcome-file>
     </welcome-file-list>

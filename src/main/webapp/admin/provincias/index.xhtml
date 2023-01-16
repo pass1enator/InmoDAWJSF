@@ -23,25 +23,11 @@
                         <h:outputText value="#{provincia.nombre}" />
                     </p:column>
 
-<p:column headerText="Activo">
-                <p:selectBooleanCheckbox  id="activo" value="#{provincia.activo}" itemLabel="Activo" disabled="true"/>  
-
-            </p:column>
-                    <!--  <p:column headerText="Borrar" style="width:3rem;text-align: center">
-                          <p:commandButton  action="edit" value="Select"
-                                            icon="pi pi-search" title="View">
-                              <f:setPropertyActionListener value="#{provincia}"
-                                                           target="#{provinciaController.selected}"/>
-                          </p:commandButton>
-                      </p:column>-->
-
+                    <p:column headerText="Activo">
+                        <p:selectBooleanCheckbox  id="activo" value="#{provincia.activo}" itemLabel="Activo" disabled="true"/>  
+                    </p:column>
                     <p:column headerText="Editar">
-
                         <h:form>
-
-
-
-
                             <p:commandButton action = "#{provinciaController.preEdit}" value = "Editar" icon="pi pi-pencil" styleClass="ui-button-success"> <!--process="@this" >-->
                                 <f:setPropertyActionListener value="#{provincia}"
                                                              target="#{provinciaController.selected}"/>
@@ -50,9 +36,7 @@
 
                     </p:column>
                     <p:column headerText="Borrar">
-
                         <h:form>
-
                             <p:commandButton action = "#{provinciaController.remove}" value = "Borrar" icon="pi pi-trash" styleClass="ui-button-danger" >
                                 <f:setPropertyActionListener value="#{provincia}"
                                                              target="#{provinciaController.selected}"/>
@@ -64,7 +48,7 @@
                 </p:dataTable>
 
                 <h:form>
-                    <p:commandButton action = "#{provinciaController.create}"   value = "Nuevo"  icon="pi pi-plus-circle"  />
+                   <p:commandButton action = "#{provinciaController.create}"   value = "Nuevo"  icon="pi pi-plus-circle"  />
                 </h:form>
 
             </ui:define>

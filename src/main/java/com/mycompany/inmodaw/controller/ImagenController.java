@@ -93,12 +93,7 @@ public class ImagenController extends AbstractController<Imagen> {
                 this.getSelected().setId(this.propiedadcontroller.getSelected().getImagenes().size() + 1);
                 this.propiedadcontroller.getSelected().getImagenes().add(this.getSelected());
             } else {
-                //si ya existe
-               // Propiedad t = this.repositorio.getAll().stream().filter(item -> {
-               //     return item.getId() == this.getSelected().getId();
-               // }).findFirst().get();
-                /* t.setNombre(this.getSelected().getNombre());
-            t.setActivo(this.getSelected().isActivo());*/
+              
                 this.setSelected(null);
             }
         }

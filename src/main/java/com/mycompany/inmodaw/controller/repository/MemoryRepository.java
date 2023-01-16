@@ -17,8 +17,12 @@ public class MemoryRepository<T>  implements IRepository<T>{
    }
 
     @Override
-    public void add(T item) {
+    public void create(T item) {
         this.elements.add(item);
+    }
+    @Override
+    public void update(T item){
+        //en este caso no se hace nada ya que se encuentra actualizado
     }
     public void remove (T item){
         this.elements.remove(item);

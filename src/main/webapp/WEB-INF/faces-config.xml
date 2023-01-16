@@ -274,6 +274,10 @@
             <from-outcome>remove</from-outcome>
             <to-view-id>/admin/propiedades/edit.xhtml</to-view-id>
         </navigation-case>
+          <navigation-case>
+            <from-outcome>reload</from-outcome>
+            <to-view-id>/admin/propiedades/edit.xhtml</to-view-id>
+        </navigation-case>
         <navigation-case>
             <from-outcome>edit</from-outcome>
             <to-view-id>/admin/localidades/edit.xhtml</to-view-id>
@@ -286,10 +290,13 @@
             <from-outcome>failure</from-outcome>
             <to-view-id>/admin/propiedades/edit.xhtml</to-view-id>
         </navigation-case>
-       
+       <navigation-case>
+            <from-outcome>imageadd</from-outcome>
+            <to-view-id>/admin/imagenes/edit.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
     
-        <navigation-rule>
+    <navigation-rule>
         <from-view-id>/admin/propiedades/create.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>sucess</from-outcome>
@@ -302,5 +309,16 @@
        
     </navigation-rule>
    
-   
+   <navigation-rule>
+        <from-view-id>/admin/imagenes/edit.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>sucess</from-outcome>
+            <to-view-id>/admin/propiedades/edit.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>/admin/imagenes/edit.xhtml</to-view-id>
+        </navigation-case>
+       
+    </navigation-rule>
 </faces-config>

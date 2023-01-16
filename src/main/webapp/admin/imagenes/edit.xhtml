@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <title>Editar</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../../templates/admin.xhtml">
+            <ui:param name="parametro" value="Imagen->Editar"/>
+            <ui:define name="contenido">
+                <p:outputPanel id="manage-product-content" class="ui-fluid">
+                    <h:form  enctype="multipart/form-data">
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Id" for="id" />
+                            <p:inputText id="id" disabled="true" value="#{imagenEditView.imagen.id}"/>
+                            <h:outputLabel value="Nombre" for="name" />
+                            <p:inputText id="posicion" value="#{imagenEditView.imagen.posicion}" title="name" disabled="true"/>
+                            <h:outputLabel value="Imagen" for="Imagen" />
+                            <p:fileUpload mode="simple"
+                                          multiple="false"
+                                          value="#{imagenEditView.file}"
+                                          sizeLimit="102400" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                          invalidSizeMessage="Maximum file size allowed is 100 KB"
+                                          invalidFileMessage="only gif | jpg | jpeg | png is allowed"
+                                           skinSimple="true"
+                                         />
+
+                            <p:commandButton action="#{imagenEditView.cancel}" value="Cancelar" icon="pi pi-times"  styleClass="ui-button-warning"/>
+                            <p:commandButton action="#{imagenEditView.save}" ajax="false" value="Alta" icon="pi pi-refresh" styleClass="ui-button-success"/>
+
+                        </h:panelGrid>
+                    </h:form>
+                </p:outputPanel>     
+            </ui:define>
+        </ui:composition>
+
+
+    </h:body>
+</html>

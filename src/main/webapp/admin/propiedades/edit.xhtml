@@ -20,6 +20,9 @@
                         <h:panelGrid columns="2">
                             <h:outputLabel value="Id" for="id" />
                             <p:inputText id="id" disabled="true" value="#{propiedadEditView.propiedad.id}"/>
+                            <p:outputLabel for="precio" value="Precio"/>
+                            <p:inputNumber id="precio" value="#{propiedadEditView.propiedad.precio}" symbol=" €"
+                                           symbolPosition="s"  minValue="1" decimalPlaces="0" />
                             <h:outputLabel value="Dirección" for="direccion" />
                             <p:inputText id="direccion" value="#{propiedadEditView.propiedad.direccion}" title="direccion" required="true" requiredMessage="requerido"/>
                             <h:outputLabel value="Activo" for="activo" />
@@ -62,15 +65,16 @@
                                                itemLabel="#{localidad.nombre}"
                                                />
                             </p:selectOneMenu>
-                            <p:commandButton action="#{propiedadEditView.cancel}" value="Cancelar" icon="pi pi-times"  styleClass="ui-button-warning"/>
+                            <p:commandButton action="#{propiedadEditView.cancel}" value="Cancelar" icon="pi pi-times"  styleClass="ui-button-warning" process="@this"/>
 
-                            <p:commandButton action="#{propiedadEditView.add}" value="Alta"/>
+                            <p:commandButton action="#{propiedadEditView.add}" value="Guardar"/>
+
                         </h:panelGrid>
                     </h:form>
                 </p:outputPanel> 
 
 
-
+            
                 <p:dataTable id="imagen" var="imagen" value="#{propiedadEditView.propiedad.imagenes}" 
                              rowKey="#{imagen.id}"
 
@@ -86,36 +90,51 @@
                         </p:selectOneMenu>-->
                     </p:column>
                     <p:column headerText="Nombre">
-                        <h:outputText value="#{imagen.path}" />
+                        <img src="../../../img/#{imagen.path}" width="50px"/>
+                        <h:outputText value="#{imagen.path}"/> 
                     </p:column>
 
-                
-                   <!-- <p:column headerText="Editar">
 
-                        <h:form>
 
-                            <p:commandButton action = "#{localidadController.preEdit}" value = "Editar" > 
-                                <f:setPropertyActionListener value="#{localidad}"
-                                                             target="#{localidadController.selected}"/>
-                            </p:commandButton>
-                        </h:form>
-
-                    </p:column>
                     <p:column headerText="Borrar">
-
-                        <h:form>
-
-                            <p:commandButton action = "#{provinciaController.removeLocalidad}" value = "Borrar" icon="pi pi-trash" styleClass="ui-button-danger" >
-                                <f:setPropertyActionListener value="#{localidad}"
-                                                             target="#{localidadController.selected}"/>
+                        <h:form >
+                            <p:commandButton ajax="false" action = "#{propiedadEditView.removeImage}" value = "Borrar" icon="pi pi-trash" styleClass="ui-button-danger" process="@form" >
+                                <f:setPropertyActionListener value="#{imagen}"
+                                                             target="#{propiedadEditView.selected}"/>
 
                             </p:commandButton>
-
                         </h:form>
+                    </p:column>
 
-                    </p:column>-->
+
+                    <!-- <p:column headerText="Editar">
+ 
+                         <h:form>
+ 
+                             <p:commandButton action = "#{localidadController.preEdit}" value = "Editar" > 
+                                 <f:setPropertyActionListener value="#{localidad}"
+                                                              target="#{localidadController.selected}"/>
+                             </p:commandButton>
+                         </h:form>
+ 
+                     </p:column>
+                     <p:column headerText="Borrar">
+ 
+                         <h:form>
+ 
+                             <p:commandButton action = "#{provinciaController.removeLocalidad}" value = "Borrar" icon="pi pi-trash" styleClass="ui-button-danger" >
+                                 <f:setPropertyActionListener value="#{localidad}"
+                                                              target="#{localidadController.selected}"/>
+ 
+                             </p:commandButton>
+ 
+                         </h:form>
+ 
+                     </p:column>-->
                 </p:dataTable>
-
+                <h:form>
+                    <p:commandButton action = "#{propiedadEditView.precreate}"   value = "Nueva imagen"  icon="pi pi-plus-circle" />
+                </h:form>
             </ui:define>
         </ui:composition>
 

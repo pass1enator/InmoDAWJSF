@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.inmodaw.views.propiedades;
+package com.mycompany.inmodaw.views;
 
 import com.mycompany.inmodaw.controller.OpcionController;
 import com.mycompany.inmodaw.controller.PropiedadController;
@@ -16,9 +16,12 @@ import com.mycompany.inmodaw.model.Provincia;
 import com.mycompany.inmodaw.model.Tipo;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,17 +47,19 @@ public class PropiedadEditView implements Serializable {
     private Propiedad propiedad;
     private Provincia provincia;
     private Imagen imagenselected;
-    //private Localidad localidad;
-    //private Tipo tipo;
-
-    //private Opcion opcion;
-    //private List<Localidad> localidades;
-    private String texto;
+    
+    private String destination = "C:\\Users\\Pedro\\Desktop\\payara6\\glassfish\\domains\\domain1\\docroot\\img";
+   
 
     public PropiedadEditView() {
 
     }
-
+    public void setSelected(Imagen img){
+        this.imagenselected=img;
+    }
+    public Imagen getSelected(){
+        return this.imagenselected;
+    }
     /**
      * @return the t
      */
@@ -90,12 +95,13 @@ public class PropiedadEditView implements Serializable {
 
     @PostConstruct
     public void init() {
+       
         // this.tipo = new Tipo();
         if (this.propiedadController.getSelected() == null) {
             this.propiedad = new Propiedad();
         } else {
             //se clona por si se da a cancelar
-            this.propiedad = (Propiedad) this.propiedadController.getSelected().clone(); //.getSelected();
+            this.propiedad = (Propiedad) this.propiedadController.getSelected();//.clone(); //.getSelected();
             this.provincia = this.provinciacontroller.getProvinciaByLocalidad(this.propiedad.getLocalidad());
 
         }
@@ -173,19 +179,7 @@ public class PropiedadEditView implements Serializable {
         return this.tipocontroller.getItems();
     }
 
-    /**
-     * @return the texto
-     */
-    public String getTexto() {
-        return texto;
-    }
-
-    /**
-     * @param texto the texto to set
-     */
-    public void setTexto(String texto) {
-        this.texto = texto;
-    }
+  
 
     /**
      * @return the propiedad
@@ -245,7 +239,7 @@ public class PropiedadEditView implements Serializable {
     public String preEdit() {
         return "edit";
     }
-
+  
     public String create() {
         this.propiedadController.setSelected(null);
         this.propiedad = new Propiedad();
@@ -255,5 +249,16 @@ public class PropiedadEditView implements Serializable {
     public String cancel() {
         this.propiedad = null;
         return "sucess";
+    }
+    public String precreate(){
+        return "imageadd";
+    }
+    public String removeImage(){
+        File f= new File(this.destination+"/"+this.imagenselected.getPath());
+        f.delete();
+        this.propiedad.removeImagen(imagenselected);
+      //  this.propiedadController.removeImage(imagenselected);
+    
+        return "reload";
     }
 }

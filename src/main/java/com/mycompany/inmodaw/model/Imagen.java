@@ -14,6 +14,8 @@ public class Imagen {
     private int posicion;
     public Imagen(){
         this.id=-1;
+        this.posicion=-1;
+        this.path="";
     }
 
     /**

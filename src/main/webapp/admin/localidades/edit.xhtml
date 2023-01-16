@@ -6,34 +6,32 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       >
-<h:head>
+    <h:head>
         <title>Editar</title>
     </h:head>
     <h:body>
-        <p:outputPanel id="manage-product-content" class="ui-fluid">
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="Id" for="id" />
-                    <p:inputText id="id" disabled="true" value="#{localidadController.selected.id}"/>
-                    <h:outputLabel value="Nombre" for="name" />
-                    <p:inputText id="name" value="#{localidadController.selected.nombre}" title="name" required="true" requiredMessage="requerido"/>
-                  <h:outputLabel value="Activo" for="activo" />
-                   
-                    <p:selectBooleanCheckbox  id="activo" value="#{localidadController.selected.activo}" itemLabel="Activo"/>  
-                    
-                    <h:commandButton action="#{localidadController.add}" value="Actualizar"/>
-               <h:commandButton action="#{localidadController.cancel}" value="Cancelar"/>
-                </h:panelGrid>
-            </h:form>
-        </p:outputPanel>     
-     <!-- <h:commandLink action="#{inmoOptionController.update}" value="Update"  />
-       <p:commandButton value="Save" icon="pi pi-check" actionListener="#{inmoOptionController.update}" action="#{inmoOptionController.update}"
-          update="manage-product-content" process="manage-product-content @this" />
-         <p:commandButton value="Cancel" icon="pi pi-check"  action="list" process=" @this"
-        />
-    
-      <br />
-      <br />n-->
+        <ui:composition template="../../templates/admin.xhtml">
+            <ui:param name="parametro" value="Localidad>>Crear"/>
+            <ui:define name="contenido">
+                <p:outputPanel id="manage-product-content" class="ui-fluid">
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Id" for="id" />
+                            <p:inputText id="id" disabled="true" value="#{localidadController.selected.id}"/>
+                            <h:outputLabel value="Nombre" for="name" />
+                            <p:inputText id="name" value="#{localidadController.selected.nombre}" title="name" required="true" requiredMessage="requerido"/>
+                            <h:outputLabel value="Activo" for="activo" />
+
+                            <p:selectBooleanCheckbox  id="activo" value="#{localidadController.selected.activo}" itemLabel="Activo"/>  
+
+                               <p:commandButton action="#{localidadController.cancel}" value="Cancelar" icon="pi pi-times"  styleClass="ui-button-warning" process="@this"/>
+                        <p:commandButton action="#{localidadController.add}" value="Guardar" icon="pi pi-refresh" styleClass="ui-button-success"/>
+
+                        </h:panelGrid>
+                    </h:form>
+                </p:outputPanel>     
+            </ui:define>
+        </ui:composition>
 
 
     </h:body>
