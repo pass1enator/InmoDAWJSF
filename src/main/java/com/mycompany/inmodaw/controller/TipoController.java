@@ -19,10 +19,8 @@ import jakarta.inject.Named;
 @Named
 @ApplicationScoped
 public class TipoController extends AbstractController<Tipo> {
-
     @Inject
     PropiedadController propiedadcontroller;
-
     public TipoController() {
         super(Tipo::new);
         //this.load();

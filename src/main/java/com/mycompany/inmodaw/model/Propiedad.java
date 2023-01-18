@@ -30,111 +30,53 @@ public class Propiedad implements Cloneable {
         this.tipo = new Tipo();
     }
 
-    /**
-     * @return the direccion
-     */
     public String getDireccion() {
         return direccion;
     }
     public Localidad getLocalidad(){
         return this.localidad;
     }
-    /**
-     * @param direccion the direccion to set
-     */
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-
-    /**
-     * @return the precio
-     */
     public int getPrecio() {
         return precio;
     }
-
-    /**
-     * @param precio the precio to set
-     */
     public void setPrecio(int precio) {
         this.precio = precio;
     }
-
-    /**
-     * @return the tipo
-     */
     public Tipo getTipo() {
         return tipo;
     }
-
-    /**
-     * @param tipo the tipo to set
-     */
     public void setTipo(Tipo tipo) {
         this.tipo = tipo;
     }
-
-    /**
-     * @return the opcion
-     */
     public Opcion getOpcion() {
         return opcion;
     }
-
-    /**
-     * @param opcion the opcion to set
-     */
     public void setOpcion(Opcion opcion) {
         this.opcion = opcion;
     }
 
-  
-
-    /**
-     * @param localidad the localidad to set
-     */
     public void setLocalidad(Localidad localidad) {
         this.localidad = localidad;
     }
-
-    /**
-     * @return the imagenes
-     */
     public ArrayList<Imagen> getImagenes() {
         return imagenes;
     }
-
-    /**
-     * @param imagenes the imagenes to set
-     */
     public void setImagenes(ArrayList<Imagen> imagenes) {
         this.imagenes = imagenes;
     }
-
-    /**
-     * @return the activo
-     */
     public boolean isActivo() {
         return activo;
     }
-
-    /**
-     * @param activo the activo to set
-     */
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
 
-    /**
-     * @return the id
-     */
     public int getId() {
         return id;
     }
-
-    /**
-     * @param id the id to set
-     */
     public void setId(int id) {
         this.id = id;
     }

@@ -24,7 +24,7 @@
                             <h:outputLabel value="Activo" for="activo" />
 
                             <p:selectBooleanCheckbox  id="activo" value="#{tipoController.selected.activo}" itemLabel="Activo"/>  
-                            <p:commandButton action="#{tipoController.cancel}" value="Cancelar" icon="pi pi-times"  styleClass="ui-button-warning"/>
+                            <p:commandButton action="#{tipoController.cancel}" value="Cancelar" icon="pi pi-times"  styleClass="ui-button-warning"  process="@this"/>
 
                             <p:commandButton action="#{tipoController.add}" value="Actualizar" icon="pi pi-refresh" styleClass="ui-button-success"/>
                         </h:panelGrid>

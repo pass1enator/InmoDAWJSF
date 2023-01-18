@@ -15,7 +15,6 @@ public class MemoryRepository<T>  implements IRepository<T>{
    public MemoryRepository(){
        this.elements= new ArrayList<>();
    }
-
     @Override
     public void create(T item) {
         this.elements.add(item);
@@ -31,16 +30,13 @@ public class MemoryRepository<T>  implements IRepository<T>{
     public void remove(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
     @Override
     public ArrayList<T> getAll() {
         return this.elements;
        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
     @Override
     public T getByid(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-   
 }

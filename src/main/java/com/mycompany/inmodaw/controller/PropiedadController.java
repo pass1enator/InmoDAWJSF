@@ -56,10 +56,7 @@ public class PropiedadController extends AbstractController<Propiedad> {
         this.getSelected().setTipo(this.tipocontroller.getItems().get(0));
         this.getSelected().setLocalidad(this.provinciacontroller.getItems().get(0).getLocalidades().get(0));
         this.getSelected().setActivo(true);
-        
-        this.add();
-
-       
+        this.add();  
     }
     
     public String remove() {
@@ -68,30 +65,13 @@ public class PropiedadController extends AbstractController<Propiedad> {
         }
         return "remove";
     }
-
     @Override
     public String preEdit() {
         return "edit";
     }
-
-    public String preEditLocalidad() {
-        return "edit_localidad";
-    }
-
-    public String precreateLocalidad() {
-        this.localidadontroller.create();
-        return "create";
-    }
-
+  
     public void selectedChange(ValueChangeEvent event) {
         this.setSelected((Propiedad) event.getNewValue());
-    }
-
-    public String addLocalidad() {
-        /*Localidad l = this.localidadontroller.getSelected();
-        l.setId(this.getSelected().getLocalidades().size());
-        this.getSelected().getLocalidades().add(l);*/
-        return "sucess";
     }
     public Propiedad getPropiedadById(int id){
         Propiedad p=null;
@@ -104,11 +84,6 @@ public class PropiedadController extends AbstractController<Propiedad> {
     public void removeImage(Imagen img){
        this.getSelected().removeImagen(img);
     }
-    /*public String removeLocalidad() {
-        Localidad l = this.localidadontroller.getSelected();
-        this.getSelected().getLocalidades().remove(l);
-        return "remove";
-    }*/
     @Override
     public String add() {
         //si es nuevo
@@ -117,14 +92,8 @@ public class PropiedadController extends AbstractController<Propiedad> {
                 this.getSelected().setId(this.repositorio.getAll().size() + 1);
                 this.repositorio.create(this.getSelected());
             } else {
-                //si ya existe
-                /*Propiedad t = this.repositorio.getAll().stream().filter(item -> {
-                    return item.getId() == this.getSelected().getId();
-                }).findFirst().get();*/
+                
                 this.repositorio.update(this.getSelected());
-                /* t.setNombre(this.getSelected().getNombre());*/
-          
-            
             }
         }
         return "sucess";

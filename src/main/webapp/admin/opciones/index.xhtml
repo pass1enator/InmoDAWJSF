@@ -10,68 +10,44 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
- <ui:composition template="../../templates/admin.xhtml">
-     <ui:param name="parametro" value="Opciones>>Listado"/>
+        <ui:composition template="../../templates/admin.xhtml">
+            <ui:param name="parametro" value="Opciones>>Listado"/>
             <ui:define name="contenido">
-            
-        <p:dataTable id="opcion" var="opcion" value="#{opcionController.items}" rowKey="#{opcion.id}"
-                     selection="#{opcionController.selected}" selectionMode="single"
-                     >
 
-
-            <p:column headerText="Code">
-                <h:outputText value="#{opcion.id}" />
-            </p:column>
-            <p:column headerText="Name">
-                <h:outputText value="#{opcion.nombre}" />
-            </p:column>
-            <p:column headerText="Activo">
-                <p:selectBooleanCheckbox  id="activo" value="#{opcion.activo}" itemLabel="Activo" disabled="true"/>  
-
-            </p:column>
-
-            <!--  <p:column headerText="Borrar" style="width:3rem;text-align: center">
-                  <p:commandButton  action="edit" value="Select"
-                                    icon="pi pi-search" title="View">
-                      <f:setPropertyActionListener value="#{opcion}"
-                                                   target="#{opcionController.selected}"/>
-                  </p:commandButton>
-              </p:column>-->
-
-            <p:column headerText="Editar">
-
-                <h:form>
-
-
-                    
-                    
-                    <p:commandButton action = "#{opcionController.preEdit}" value = "Editar" icon="pi pi-pencil" styleClass="ui-button-success"> 
-                        <f:setPropertyActionListener value="#{opcion}"
-                                                     target="#{opcionController.selected}"/>
-                    </p:commandButton>
-                </h:form>
-
-            </p:column>
-            <p:column headerText="Borrar">
+                <p:dataTable id="opcion" var="opcion" value="#{opcionController.items}" rowKey="#{opcion.id}"
+                             selection="#{opcionController.selected}" selectionMode="single"
+                             >
+                    <p:column headerText="Code">
+                        <h:outputText value="#{opcion.id}" />
+                    </p:column>
+                    <p:column headerText="Name">
+                        <h:outputText value="#{opcion.nombre}" />
+                    </p:column>
+                    <p:column headerText="Activo">
+                        <p:selectBooleanCheckbox  id="activo" value="#{opcion.activo}" itemLabel="Activo" disabled="true"/>  
+                    </p:column>
+                    <p:column headerText="Editar">
+                        <h:form>
+                            <p:commandButton action = "#{opcionController.preEdit}" value = "Editar" icon="pi pi-pencil" styleClass="ui-button-success"> 
+                                <f:setPropertyActionListener value="#{opcion}"
+                                                             target="#{opcionController.selected}"/>
+                            </p:commandButton>
+                        </h:form>
+                    </p:column>
+                    <p:column headerText="Borrar">
+                        <h:form>
+                            <p:commandButton action = "#{opcionController.remove}" value = "Borrar" icon="pi pi-trash" styleClass="ui-button-danger" >
+                                <f:setPropertyActionListener value="#{opcion}"
+                                                             target="#{opcionController.selected}"/>
+                            </p:commandButton>
+                        </h:form>
+                    </p:column>
+                </p:dataTable>
 
                 <h:form>
-
-                    <p:commandButton action = "#{opcionController.remove}" value = "Borrar" icon="pi pi-trash" styleClass="ui-button-danger" >
-                        <f:setPropertyActionListener value="#{opcion}"
-                                                     target="#{opcionController.selected}"/>
-                    </p:commandButton>
-
+                    <p:commandButton action = "#{opcionController.create}"   value = "Nuevo"  icon="pi pi-plus-circle"  />
                 </h:form>
-
-            </p:column>
-        </p:dataTable>
-
-        <h:form>
-            <p:commandButton action = "#{opcionController.create}"   value = "Nuevo"  icon="pi pi-plus-circle"  />
-        </h:form>
-
             </ui:define>
         </ui:composition>
-
     </h:body>
 </html>

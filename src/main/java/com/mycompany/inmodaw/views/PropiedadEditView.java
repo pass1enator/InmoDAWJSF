@@ -47,19 +47,23 @@ public class PropiedadEditView implements Serializable {
     private Propiedad propiedad;
     private Provincia provincia;
     private Imagen imagenselected;
-    
-    private String destination = "C:\\Users\\Pedro\\Desktop\\payara6\\glassfish\\domains\\domain1\\docroot\\img";
-   
+
+    private String destination = "";
 
     public PropiedadEditView() {
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        this.destination  = ctx.getExternalContext().getInitParameter("ruta_imagenes");
+        //System.out.println("El valor es " + myConstantValue);
+    }
 
+    public void setSelected(Imagen img) {
+        this.imagenselected = img;
     }
-    public void setSelected(Imagen img){
-        this.imagenselected=img;
-    }
-    public Imagen getSelected(){
+
+    public Imagen getSelected() {
         return this.imagenselected;
     }
+
     /**
      * @return the t
      */
@@ -95,7 +99,7 @@ public class PropiedadEditView implements Serializable {
 
     @PostConstruct
     public void init() {
-       
+
         // this.tipo = new Tipo();
         if (this.propiedadController.getSelected() == null) {
             this.propiedad = new Propiedad();
@@ -179,8 +183,6 @@ public class PropiedadEditView implements Serializable {
         return this.tipocontroller.getItems();
     }
 
-  
-
     /**
      * @return the propiedad
      */
@@ -233,13 +235,13 @@ public class PropiedadEditView implements Serializable {
             this.propiedadController.setSelected(null);
             return "failed";
         }
-      
+
     }
 
     public String preEdit() {
         return "edit";
     }
-  
+
     public String create() {
         this.propiedadController.setSelected(null);
         this.propiedad = new Propiedad();
@@ -250,15 +252,17 @@ public class PropiedadEditView implements Serializable {
         this.propiedad = null;
         return "sucess";
     }
-    public String precreate(){
+
+    public String precreate() {
         return "imageadd";
     }
-    public String removeImage(){
-        File f= new File(this.destination+"/"+this.imagenselected.getPath());
+
+    public String removeImage() {
+        File f = new File(this.destination + "/" + this.imagenselected.getPath());
         f.delete();
         this.propiedad.removeImagen(imagenselected);
-      //  this.propiedadController.removeImage(imagenselected);
-    
+        //  this.propiedadController.removeImage(imagenselected);
+
         return "reload";
     }
 }
