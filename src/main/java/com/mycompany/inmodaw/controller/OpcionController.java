@@ -10,6 +10,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import java.util.Optional;
 
 /**
  *
@@ -48,7 +49,29 @@ public class OpcionController extends AbstractController<Opcion> {
         this.getSelected().setNombre("Compartir");
         this.add();
     }
-
+    public Opcion findById(int id){
+        Optional<Opcion> o=null;
+       o=this.getItems().stream().filter(
+               item -> {
+                return item.getId() == id;
+           }).findFirst();
+       if(o.isEmpty())
+           return null;
+       else
+           return o.get();
+    }
+      public Opcion findByName(String name){
+        Optional<Opcion> o=null;
+       o=this.getItems().stream().filter(
+               item -> {
+                return item.getNombre().equals(name);
+           }).findFirst();
+       if(o.isEmpty())
+           return null;
+       else
+           return o.get();
+    }
+      
     public String remove() {
         if (this.getSelected() != null) {
             if (this.propiedadcontroller.getItems().stream().filter(item -> {

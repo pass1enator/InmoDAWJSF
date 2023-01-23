@@ -9,15 +9,18 @@ package com.mycompany.inmodaw.model;
  * @author Pedro
  */
 public class Opcion {
-     private String nombre;
+
+    private String nombre;
     private boolean activo;
     private int id;
-    public Opcion(){
-       this.id = -1;
-        this.nombre="";
-        this.activo=true;
+
+    public Opcion() {
+        this.id = -1;
+        this.nombre = "";
+        this.activo = true;
     }
-     /**
+
+    /**
      * @return the nombre
      */
     public String getNombre() {
