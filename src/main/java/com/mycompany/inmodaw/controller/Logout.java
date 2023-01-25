@@ -5,7 +5,10 @@
 package com.mycompany.inmodaw.controller;
 
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
+import jakarta.servlet.http.HttpSession;
+import java.io.Serializable;
 
 /**
  *
@@ -13,11 +16,16 @@ import jakarta.inject.Named;
  */
 @Named
 @RequestScoped
-public class Logout {
+public class Logout implements Serializable {
     public Logout(){
         
     }
-    public String logout(){
-        return "logut";
+    public String exit() {
+        //se podría validar por cualquier sistema: base de datos, ldap, ficheos, SO
+        
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            session.removeAttribute("usuario");
+            return "logout";
+        
     }
 }

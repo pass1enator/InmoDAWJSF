@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <title>Editar</title>
+        <style>
+            .panelGrid {
+                margin: 10em auto ;
+                border: 2px solid black;
+                padding: 1em;
+                background-color: #0275d8;
+                color: #ffffff;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="2" styleClass="panelGrid">
+                <h:outputLabel value="Usuario" for="usurio" />
+                <p:inputText id="usuario"  value="#{loginController.user.user}" required="true" requiredMessage="requerido"/>
+                <h:outputLabel value="Clave" for="clave" />
+                <p:inputText id="clave" value="#{loginController.user.password}" title="password" required="true" requiredMessage="requerido"/>
+                <h:outputLabel value="Activo" for="activo" />
+                <p:commandButton action="#{loginController.login}" value="Entrar" icon="pi pi-lock-open" styleClass="ui-button-success"/>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>

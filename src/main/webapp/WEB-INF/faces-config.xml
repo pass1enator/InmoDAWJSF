@@ -321,4 +321,26 @@
         </navigation-case>
        
     </navigation-rule>
+    
+    
+    
+     <!--login-->
+     <navigation-rule>
+        <from-view-id>/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/admin/opciones/index.xhtml</to-view-id>
+        </navigation-case>
+     
+    </navigation-rule>
+    
+     <!--logout-->
+     <navigation-rule>
+        <from-view-id>/admin/*</from-view-id>
+        <navigation-case>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>
+     
+    </navigation-rule>
 </faces-config>

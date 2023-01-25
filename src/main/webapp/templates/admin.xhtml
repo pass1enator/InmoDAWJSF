@@ -59,16 +59,12 @@
 
 
                         <f:facet name="options">
-                            <!-- <div class="ui-input-icon-left mr-2">
- 
- 
-                                 <i class="pi pi-fw pi-search" />
-                                 <p:inputText placeholder="Search"/>
-                             </div>-->
-                            <p:button value="Logout" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info"/>
+<p:commandButton value="Logout" icon="pi pi-fw pi-sign-out" action="#{logout.exit}" styleClass="ui-button-info" process="@this"/>
                         </f:facet>
                     </p:menubar>
+
                 </h:form>
+                
             </div>
             <!--<div class="item2">Menu</div>-->
             <div class="item3">
